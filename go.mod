@@ -29,7 +29,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang/protobuf v1.5.2
 	github.com/google/go-cmp v0.5.8
-	github.com/google/go-containerregistry v0.7.0
+	github.com/google/go-containerregistry v0.11.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/imdario/mergo v0.3.12
@@ -49,7 +49,7 @@ require (
 	github.com/vmware-tanzu/tanzu-framework/packageclients v0.0.0-20220908202723-7a1ddb97efab
 	github.com/vmware-tanzu/tanzu-framework/tkg v0.0.0-00010101000000-000000000000
 	github.com/vmware/govmomi v0.27.1
-	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a
+	golang.org/x/oauth2 v0.0.0-20220718184931-c8730f7fcb92
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
 	gomodules.xyz/jsonpatch/v2 v2.2.0
 	google.golang.org/grpc v1.44.0
@@ -89,7 +89,7 @@ require (
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
-	github.com/Microsoft/go-winio v0.5.1 // indirect
+	github.com/Microsoft/go-winio v0.5.2 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/alessio/shellescape v1.4.1 // indirect
@@ -109,7 +109,7 @@ require (
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/cncf/udpa/go v0.0.0-20210930031921-04548b0d99d4 // indirect
 	github.com/cncf/xds/go v0.0.0-20211130200136-a8f946100490 // indirect
-	github.com/containerd/stargz-snapshotter/estargz v0.10.0 // indirect
+	github.com/containerd/stargz-snapshotter/estargz v0.12.0 // indirect
 	github.com/coredns/caddy v1.1.1 // indirect
 	github.com/coredns/corefile-migration v1.0.17 // indirect
 	github.com/cppforlife/cobrautil v0.0.0-20220411122935-c28a9f274a4e // indirect
@@ -117,9 +117,9 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
-	github.com/docker/cli v20.10.11+incompatible // indirect
+	github.com/docker/cli v20.10.17+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
-	github.com/docker/docker v20.10.16+incompatible // indirect
+	github.com/docker/docker v20.10.17+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.6.4 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
@@ -172,7 +172,7 @@ require (
 	github.com/k14s/semver/v4 v4.0.1-0.20210701191048-266d47ac6115 // indirect
 	github.com/k14s/starlark-go v0.0.0-20200720175618-3a5c849cc368 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
-	github.com/klauspost/compress v1.13.6 // indirect
+	github.com/klauspost/compress v1.15.8 // indirect
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
@@ -193,7 +193,7 @@ require (
 	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/opencontainers/image-spec v1.0.2 // indirect
+	github.com/opencontainers/image-spec v1.0.3-0.20220114050600-8b9d41f48198 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.5 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -208,7 +208,7 @@ require (
 	github.com/sanathkr/go-yaml v0.0.0-20170819195128-ed9d249f429b // indirect
 	github.com/sanathkr/yaml v0.0.0-20170819201035-0056894fa522 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/sirupsen/logrus v1.8.1 // indirect
+	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966 // indirect
 	github.com/spf13/afero v1.9.2 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
