@@ -11,6 +11,7 @@ import (
 	kappipkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 	kapppkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apiserver/apis/datapackaging/v1alpha1"
 	secretgen "github.com/vmware-tanzu/carvel-secretgen-controller/pkg/apis/secretgen2/v1alpha1"
+	esVersion "github.com/vmware-tanzu/tanzu-framework/apis/externalsecrets/v1beta1"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/packagedatamodel"
 )
 
@@ -45,6 +46,7 @@ type PackageClient interface {
 	UpdatePackageSync(o *packagedatamodel.PackageOptions, operationType packagedatamodel.OperationType) error
 	UpdateRepository(o *packagedatamodel.RepositoryOptions, progress *packagedatamodel.PackageProgress, operationType packagedatamodel.OperationType)
 	UpdateRepositorySync(o *packagedatamodel.RepositoryOptions, operationType packagedatamodel.OperationType) error
+	ListExternalSecrets(o *packagedatamodel.ExternalSecretOptions) (*esVersion.ExternalSecretList, error)
 }
 
 // CrtClient clientset interface

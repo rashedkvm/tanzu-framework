@@ -160,6 +160,7 @@ manifests: ## Generate manifests e.g. CRD, RBAC etc.
 	$(MAKE) -C apis/config generate-manifests
 	$(MAKE) -C apis/core generate-manifests
 	$(MAKE) -C apis/run generate-manifests
+	$(MAKE) -C apis/externalsecrets generate-manifests
 	$(MAKE) -C cli/runtime generate-manifests
 
 generate-go: $(COUNTERFEITER) ## Generate code via go generate.

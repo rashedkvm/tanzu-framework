@@ -24,3 +24,15 @@ type RegistrySecretOptions struct {
 func NewRegistrySecretOptions() *RegistrySecretOptions {
 	return &RegistrySecretOptions{}
 }
+
+// ExternalSecretOptions includes fields to interact with external-secrets.io resources
+type ExternalSecretOptions struct {
+	Namespace     string
+	AllNamespaces bool
+	OutputFormat  string
+}
+
+// ExternalSecretOptions instantiates ExternalSecretOptions
+func NewExternalSecretOptions() *ExternalSecretOptions {
+	return &ExternalSecretOptions{}
+}

@@ -18,6 +18,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 	k8sconfig "sigs.k8s.io/controller-runtime/pkg/client/config"
 
+	esVersion "github.com/vmware-tanzu/tanzu-framework/apis/externalsecrets/v1beta1"
+
 	kappctrl "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/kappctrl/v1alpha1"
 	kappipkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 	kapppkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apiserver/apis/datapackaging/v1alpha1"
@@ -358,4 +360,18 @@ func (c *client) GetSecretValue(secretName, namespace string) ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+// ListExternaSecrets gets the list of all Secrets of type "kubernetes.io/dockerconfigjson"
+func (c *client) ListExternalSecrets(namespace string) (*esVersion.ExternalSecretList, error) {
+	externalSecretList := &esVersion.ExternalSecretList{}
+	var selectors []crtclient.ListOption
+
+	selectors = []crtclient.ListOption{crtclient.InNamespace(namespace)}
+
+	err := c.client.List(context.Background(), externalSecretList, selectors...)
+	if err != nil {
+		return nil, err
+	}
+	return externalSecretList, nil
 }

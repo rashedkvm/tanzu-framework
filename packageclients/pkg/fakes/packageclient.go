@@ -9,6 +9,7 @@ import (
 	v1alpha1a "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 	"github.com/vmware-tanzu/carvel-kapp-controller/pkg/apiserver/apis/datapackaging/v1alpha1"
 	v1alpha1b "github.com/vmware-tanzu/carvel-secretgen-controller/pkg/apis/secretgen2/v1alpha1"
+	"github.com/vmware-tanzu/tanzu-framework/apis/externalsecrets/v1beta1"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/packageclient"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/packagedatamodel"
 )
@@ -146,6 +147,19 @@ type PackageClient struct {
 	}
 	installPackageSyncReturnsOnCall map[int]struct {
 		result1 error
+	}
+	ListExternalSecretsStub        func(*packagedatamodel.ExternalSecretOptions) (*v1beta1.ExternalSecretList, error)
+	listExternalSecretsMutex       sync.RWMutex
+	listExternalSecretsArgsForCall []struct {
+		arg1 *packagedatamodel.ExternalSecretOptions
+	}
+	listExternalSecretsReturns struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}
+	listExternalSecretsReturnsOnCall map[int]struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
 	}
 	ListPackageInstallsStub        func(*packagedatamodel.PackageOptions) (*v1alpha1a.PackageInstallList, error)
 	listPackageInstallsMutex       sync.RWMutex
@@ -965,6 +979,70 @@ func (fake *PackageClient) InstallPackageSyncReturnsOnCall(i int, result1 error)
 	}{result1}
 }
 
+func (fake *PackageClient) ListExternalSecrets(arg1 *packagedatamodel.ExternalSecretOptions) (*v1beta1.ExternalSecretList, error) {
+	fake.listExternalSecretsMutex.Lock()
+	ret, specificReturn := fake.listExternalSecretsReturnsOnCall[len(fake.listExternalSecretsArgsForCall)]
+	fake.listExternalSecretsArgsForCall = append(fake.listExternalSecretsArgsForCall, struct {
+		arg1 *packagedatamodel.ExternalSecretOptions
+	}{arg1})
+	stub := fake.ListExternalSecretsStub
+	fakeReturns := fake.listExternalSecretsReturns
+	fake.recordInvocation("ListExternalSecrets", []interface{}{arg1})
+	fake.listExternalSecretsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *PackageClient) ListExternalSecretsCallCount() int {
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
+	return len(fake.listExternalSecretsArgsForCall)
+}
+
+func (fake *PackageClient) ListExternalSecretsCalls(stub func(*packagedatamodel.ExternalSecretOptions) (*v1beta1.ExternalSecretList, error)) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = stub
+}
+
+func (fake *PackageClient) ListExternalSecretsArgsForCall(i int) *packagedatamodel.ExternalSecretOptions {
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
+	argsForCall := fake.listExternalSecretsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *PackageClient) ListExternalSecretsReturns(result1 *v1beta1.ExternalSecretList, result2 error) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = nil
+	fake.listExternalSecretsReturns = struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *PackageClient) ListExternalSecretsReturnsOnCall(i int, result1 *v1beta1.ExternalSecretList, result2 error) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = nil
+	if fake.listExternalSecretsReturnsOnCall == nil {
+		fake.listExternalSecretsReturnsOnCall = make(map[int]struct {
+			result1 *v1beta1.ExternalSecretList
+			result2 error
+		})
+	}
+	fake.listExternalSecretsReturnsOnCall[i] = struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *PackageClient) ListPackageInstalls(arg1 *packagedatamodel.PackageOptions) (*v1alpha1a.PackageInstallList, error) {
 	fake.listPackageInstallsMutex.Lock()
 	ret, specificReturn := fake.listPackageInstallsReturnsOnCall[len(fake.listPackageInstallsArgsForCall)]
@@ -1723,6 +1801,8 @@ func (fake *PackageClient) Invocations() map[string][][]interface{} {
 	defer fake.installPackageMutex.RUnlock()
 	fake.installPackageSyncMutex.RLock()
 	defer fake.installPackageSyncMutex.RUnlock()
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
 	fake.listPackageInstallsMutex.RLock()
 	defer fake.listPackageInstallsMutex.RUnlock()
 	fake.listPackageMetadataMutex.RLock()

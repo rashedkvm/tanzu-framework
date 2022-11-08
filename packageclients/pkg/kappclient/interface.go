@@ -12,6 +12,7 @@ import (
 	kappipkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 	kapppkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apiserver/apis/datapackaging/v1alpha1"
 	secretgen "github.com/vmware-tanzu/carvel-secretgen-controller/pkg/apis/secretgen2/v1alpha1"
+	esVersion "github.com/vmware-tanzu/tanzu-framework/apis/externalsecrets/v1beta1"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/packagedatamodel"
 )
 
@@ -40,4 +41,5 @@ type Client interface {
 	ListSecretExports(namespace string) (*secretgen.SecretExportList, error)
 	UpdatePackageInstall(packageInstall *kappipkg.PackageInstall, pkgPluginResourceCreationStatus *packagedatamodel.PkgPluginResourceCreationStatus) error
 	UpdatePackageRepository(repository *kappipkg.PackageRepository) error
+	ListExternalSecrets(namespace string) (*esVersion.ExternalSecretList, error)
 }

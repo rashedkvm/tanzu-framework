@@ -11,6 +11,7 @@ import (
 	"github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 	v1alpha1b "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apiserver/apis/datapackaging/v1alpha1"
 	v1alpha1c "github.com/vmware-tanzu/carvel-secretgen-controller/pkg/apis/secretgen2/v1alpha1"
+	"github.com/vmware-tanzu/tanzu-framework/apis/externalsecrets/v1beta1"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/kappclient"
 	"github.com/vmware-tanzu/tanzu-framework/packageclients/pkg/packagedatamodel"
 )
@@ -156,6 +157,19 @@ type KappClient struct {
 	}
 	getSecretValueReturnsOnCall map[int]struct {
 		result1 []byte
+		result2 error
+	}
+	ListExternalSecretsStub        func(string) (*v1beta1.ExternalSecretList, error)
+	listExternalSecretsMutex       sync.RWMutex
+	listExternalSecretsArgsForCall []struct {
+		arg1 string
+	}
+	listExternalSecretsReturns struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}
+	listExternalSecretsReturnsOnCall map[int]struct {
+		result1 *v1beta1.ExternalSecretList
 		result2 error
 	}
 	ListPackageInstallsStub        func(string) (*v1alpha1.PackageInstallList, error)
@@ -956,6 +970,70 @@ func (fake *KappClient) GetSecretValueReturnsOnCall(i int, result1 []byte, resul
 	}{result1, result2}
 }
 
+func (fake *KappClient) ListExternalSecrets(arg1 string) (*v1beta1.ExternalSecretList, error) {
+	fake.listExternalSecretsMutex.Lock()
+	ret, specificReturn := fake.listExternalSecretsReturnsOnCall[len(fake.listExternalSecretsArgsForCall)]
+	fake.listExternalSecretsArgsForCall = append(fake.listExternalSecretsArgsForCall, struct {
+		arg1 string
+	}{arg1})
+	stub := fake.ListExternalSecretsStub
+	fakeReturns := fake.listExternalSecretsReturns
+	fake.recordInvocation("ListExternalSecrets", []interface{}{arg1})
+	fake.listExternalSecretsMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2
+	}
+	return fakeReturns.result1, fakeReturns.result2
+}
+
+func (fake *KappClient) ListExternalSecretsCallCount() int {
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
+	return len(fake.listExternalSecretsArgsForCall)
+}
+
+func (fake *KappClient) ListExternalSecretsCalls(stub func(string) (*v1beta1.ExternalSecretList, error)) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = stub
+}
+
+func (fake *KappClient) ListExternalSecretsArgsForCall(i int) string {
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
+	argsForCall := fake.listExternalSecretsArgsForCall[i]
+	return argsForCall.arg1
+}
+
+func (fake *KappClient) ListExternalSecretsReturns(result1 *v1beta1.ExternalSecretList, result2 error) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = nil
+	fake.listExternalSecretsReturns = struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}{result1, result2}
+}
+
+func (fake *KappClient) ListExternalSecretsReturnsOnCall(i int, result1 *v1beta1.ExternalSecretList, result2 error) {
+	fake.listExternalSecretsMutex.Lock()
+	defer fake.listExternalSecretsMutex.Unlock()
+	fake.ListExternalSecretsStub = nil
+	if fake.listExternalSecretsReturnsOnCall == nil {
+		fake.listExternalSecretsReturnsOnCall = make(map[int]struct {
+			result1 *v1beta1.ExternalSecretList
+			result2 error
+		})
+	}
+	fake.listExternalSecretsReturnsOnCall[i] = struct {
+		result1 *v1beta1.ExternalSecretList
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *KappClient) ListPackageInstalls(arg1 string) (*v1alpha1.PackageInstallList, error) {
 	fake.listPackageInstallsMutex.Lock()
 	ret, specificReturn := fake.listPackageInstallsReturnsOnCall[len(fake.listPackageInstallsArgsForCall)]
@@ -1489,6 +1567,8 @@ func (fake *KappClient) Invocations() map[string][][]interface{} {
 	defer fake.getSecretExportMutex.RUnlock()
 	fake.getSecretValueMutex.RLock()
 	defer fake.getSecretValueMutex.RUnlock()
+	fake.listExternalSecretsMutex.RLock()
+	defer fake.listExternalSecretsMutex.RUnlock()
 	fake.listPackageInstallsMutex.RLock()
 	defer fake.listPackageInstallsMutex.RUnlock()
 	fake.listPackageMetadataMutex.RLock()
